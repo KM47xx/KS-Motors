@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Motors | Sell-Car</title>
+    <link rel="stylesheet" href="Kmstyle.css"></a>
+</head>
+
+<body>
+    <div id="header"></div>
+    <main>
+        <div class="carform">
+            <h2>Please Enter Your Car Details Here</h2>
+            <form id="carform">
+                <label for="manufacturer">Select Manufacturer:</label>
+                <select id="manufacturer" name="manufacturer" required>
+                    <option value="Aston-Martin">Aston-Martin</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Bentley">Bentley</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                    <option value="Landrover">Landrover</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Lotus">Lotus</option>
+                    <option value="Maserati">Maserati</option>
+                    <option value="McLaren">McLaren</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Mini">Mini</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Rolls-Royce">Rolls-Royce</option>
+                    <option value="Volvo">Volvo</option>
+                </select>
+                <br>
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" required>
+                <br>
+                <label for="year">Year:</label>
+                <input type="date" id="year" name="year" required>
+                <br>
+                <label for="type">Type:</label>
+                <select id="type" name="type" required>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="hatch">Hatchback</option>
+                    <option value="sports">Sportscar</option>
+                    <option value="super">Supercar</option>
+                </select>
+                <br>
+                <label for="fuel">Fuel:</label>
+                <select id="fuel" name="fuel" required>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Hybrid">Hybrid</option>
+                </select>
+                <br>
+                <label for="transmission">Transmission:</label>
+                <select id="transmission" name="transmission" required>
+                    <option value="Manual">Manual</option>
+                    <option value="Automatic">Automatic</option>
+                </select>
+                <br>
+                <label for="rgno">Registration Number:</label>
+                <input type="text" id="rgno" name="rgno" required>
+                <br>
+                <label for="owners">Number of Owners:</label>
+                <select id="owners" name="owners" required>
+                    <option value="1st">1st</option>
+                    <option value="2nd">2nd</option>
+                    <option value="3rd">3rd</option>
+                    <option value="4th/More">4th/More</option>
+                </select>
+                <br>
+                <label for="kms">Kilometers Driven:</label>
+                <input type="number" id="kms" name="kms" required>
+                <br>
+                <label for="price">Asking Price:</label>
+                <input type="number" id="price" name="price" required>
+                <br>
+                <label for="phno">Phone no:</label>
+                <input type="number" id="phno" name="phno">
+                <br>
+                <label for="image">Add car image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <br>
+                <button type="button" onclick="submitForm()">Submit</button>
+
+                <p id="responseMessage"></p>
+                <script>
+                    function submitForm() {
+                        //ts collects
+
+                        var carData = {
+                            type: document.getElementById("type").value,
+                            year: document.getElementById("year").value,
+                            owners: document.getElementById("owners").value,
+                            kms: document.getElementById("kms").value,
+                            price: document.getElementById("price").value,
+                            manufacturer: document.getElementById("manufacturer").value,
+                            model: document.getElementById("model").value,
+                            fuel: document.getElementById("fuel").value,
+                            transmission: document.getElementById("transmission").value,
+                            rgno: document.getElementById("rgno").value,
+                            phno: document.getElementById("phno").value,
+                        };
+                        var img=document.getElementById("image").files[0];
+                        var formdata= new FormData();
+                        formdata.append("carData",new Blob([JSON.stringify(carData)],{type:"application/json"}));
+                        formdata.append("image",img)
+
+                        //ts converts to json
+                        fetch('/submit', {
+                            method: 'POST',
+                            body: formdata
+                        })
+                            .then(response => response.text())
+                            .then(() => {
+                                document.getElementById("responseMessage").innerText = "Your Car information has been submitted succesfully! Our team will contact you within 2 days";
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                document.getElementById("responseMessage").innerText = "Error submitting form!";
+                            });
+                    }
+                </script>
+            </form>
+        </div>
+    </main>
+    <div id="footer"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>

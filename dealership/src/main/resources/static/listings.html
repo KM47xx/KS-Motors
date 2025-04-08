@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Motors</title>
+    <link rel="stylesheet" href="Kmstyle.css"></a>
+</head>
+
+<body>
+    <div id="header"></div>
+    <main>
+        <div id="carlist" class="lists"></div>
+    </main>
+    <div id="footer"></div>
+    
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get("type");
+    
+        fetch(`http://192.168.1.7:8080/listing/${type}`)
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                let displist = document.getElementById("carlist");
+                displist.innerHTML = ""; 
+
+                data.forEach(car => {
+                    let cardiv = document.createElement("div");
+                    cardiv.innerHTML = `<div class="carblock">
+                    <a href="cardetails?idno=${car.idno}">
+                        <h3>${car.manufacturer} ${car.model}</h3>
+                        <img src="http://192.168.1.7:8080/listing/${car.idno}/image" alt="${car.manufacturer} ${car.model}" class="carimage">
+                        <p>Registration Date: ${car.year} | KM: ${car.kms}</p>
+                        <p>₹${car.price}</p>
+                        </a></div>
+                    `;
+                    displist.appendChild(cardiv);
+                });
+            })
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>

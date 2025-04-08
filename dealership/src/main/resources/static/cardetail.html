@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KS Motors</title>
+        <link rel="stylesheet" href="Kmstyle.css"></a>
+    </head>
+    <body>
+        <div id="header"></div>
+        <main>
+            <div id="detail"></div>
+        </main>
+        <div id="footer"></div>
+        <script>
+    const params = new URLSearchParams(window.location.search);
+    const idno = params.get("idno");
+
+    fetch(`http://192.168.1.7:8080/cardetails/${idno}`)
+        .then(response => response.json())
+        .then(car => {
+            let displist = document.getElementById("detail");
+            displist.innerHTML = "";
+
+            let cardiv = document.createElement("div");
+            cardiv.innerHTML = `
+                <div class="detail_imgbox"><img src="http://192.168.1.7:8080/listing/${car.idno}/image" alt="Car Image"></div>
+                <div class="detail_body">
+                <h1>${car.manufacturer} ${car.model}</h1>
+                <p>Registration Date: ${car.year}</p>
+                <p>Kilometers: ${car.kms}</p>
+                <p>${car.owners} Owner</p>
+                <p>Fuel: ${car.fuel}</p>
+                <p>Transmission: ${car.transmission}</p>
+                <h2 style="color:green;">₹${car.price}</h2></div>
+            `;
+            displist.appendChild(cardiv);
+        });
+
+        </script>
+      <script src="script.js"></script>
+    </body>
+</html>
