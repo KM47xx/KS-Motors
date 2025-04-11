@@ -8,8 +8,74 @@
     </head>
     <body>
         <div id="header"></div>
-        <main><div class="latest"><p>Latest Arrivals:</p></div></main>
+        <main><div class="latest">Latest Arrivals</div>
+            <div class="horizontals">
+                <div id="carlist" class="homecars"></div>
+            </div>
+            <h2 class="latest">Cars By Brand</h2>
+            <div class="brands">
+                <table>
+                    <tr>
+                        <td><a href="brands?manufacturer=Aston-Martin"><img src="assets/logos/am.png">Aston-Martin</a></td>
+                        <td><a href="brands?manufacturer=Audi"><img src="assets/logos/audi.png">Audi</a></td>
+                        <td><a href="brands?manufacturer=Bentley"><img src="assets/logos/bentley.png">Bentley</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/bmw.png">BMW</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/ferrari.png">Ferrari</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/jaguar.png">Jaguar</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/lambhorghini.png">Lamborghini</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/landrover.png">Landrover</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/lexus.png">Lexus</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/lotus.png">Lotus</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/maserati.png">Maserati</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/mclaren.png">McLaren</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/mercedes.png">Mercedes-Benz</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/mini.png">Mini</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/porsche.png">Porsche</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/rollsroyce.png">Rolls-Royce</a></td>
+                        <td><a href="brands?manufacturer="><img src="assets/logos/volvo.png">Volvo</a></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
         <div id="footer"></div>
+        <script>
+            const params = new URLSearchParams(window.location.search);
+        const idno = params.get("idno");
+    
+        fetch(`http://192.168.1.7:8080/KS-Motors/`)//horizontals->homecarblock->homeblock
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                let displist = document.getElementById("carlist");
+                displist.innerHTML = ""; 
+                
+                data.forEach(car => {
+                    let cardiv = document.createElement("div");
+                    cardiv.innerHTML = `<div class="homecarblock">
+                    <a href="cardetails?idno=${car.idno}">
+                        <img src="http://192.168.1.7:8080/listing/${car.idno}/image" alt="${car.manufacturer} ${car.model}">
+                        <h3>${car.manufacturer} ${car.model}</h3>
+                        <p>Registration Date: ${car.year} </p>
+                        <p>KM: ${car.kms}</p>
+                        <p>₹${car.price}</p></div>
+                        </a></div>
+                    `;
+                    var next=car.idno;
+                    displist.appendChild(cardiv);
+                });
+            })
+        </script>
       <script src="script.js"></script>
     </body>
 </html>

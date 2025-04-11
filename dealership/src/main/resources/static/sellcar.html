@@ -10,9 +10,9 @@
 
 <body>
     <div id="header"></div>
-    <main>
+    <main><div class="divform">
+        <h2 style="text-align:center;color:rgb(74, 58, 47);">Please Enter Your Car Details Here</h2>
         <div class="carform">
-            <h2>Please Enter Your Car Details Here</h2>
             <form id="carform">
                 <label for="manufacturer">Select Manufacturer:</label>
                 <select id="manufacturer" name="manufacturer" required>
@@ -23,7 +23,7 @@
                     <option value="Ferrari">Ferrari</option>
                     <option value="Jaguar">Jaguar</option>
                     <option value="Lamborghini">Lamborghini</option>
-                    <option value="Landrover">Landrover</option>
+                    <option value="Land-Rover">Land-Rover</option>
                     <option value="Lexus">Lexus</option>
                     <option value="Lotus">Lotus</option>
                     <option value="Maserati">Maserati</option>
@@ -87,7 +87,7 @@
                 <label for="image">Add car image:</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
                 <br>
-                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" onclick="submitForm()" class="buttons">Submit</button>
 
                 <p id="responseMessage"></p>
                 <script>
@@ -128,7 +128,7 @@
                     }
                 </script>
             </form>
-        </div>
+        </div></div>
     </main>
     <div id="footer"></div>
     <script src="script.js"></script>

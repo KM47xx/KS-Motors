@@ -24,11 +24,6 @@ public class CarController {
     @Autowired
     CarService carservice;
 
-    @GetMapping("/L")
-    @ResponseBody
-    public List<Car> getc() {
-        return carservice.getcars();
-    }
     @GetMapping("/listing")
     public String listingpage(){
         return "listings.html";
@@ -37,18 +32,27 @@ public class CarController {
     public String detailpage(){
         return "cardetail.html";
     }
-
+    @GetMapping("/KS-Motors")
+    public String homepage(){
+        return "index.html";
+    }
+    @GetMapping("/brands")
+    public String brandpage(){
+        return "brand.html";
+    }
     @GetMapping("/listing/{type}")//listing page ka
     @ResponseBody
     public List<Car> getcarbytype(@PathVariable String type ) {
         return carservice.getcarbytype(type);
         
     }
+
     @GetMapping("/cardetails/{idno}")//single car detail page
     @ResponseBody
     public Car getdetails(@PathVariable long idno ) {
         return carservice.getcarbyidno(idno);    
     }
+
     @GetMapping("/listing/{idno}/image")
     @ResponseBody
     public ResponseEntity<byte[]> getimagebyid(@PathVariable long idno)
@@ -59,6 +63,20 @@ public class CarController {
         return ResponseEntity.ok().contentType(MediaType.valueOf(car.getImgtype())).body(img);
 
     }
+
+    @GetMapping("/KS-Motors/")
+    @ResponseBody
+    public List<Car> homecars() {
+        return carservice.getrecentcars();
+    }
+
+    @GetMapping("/brands/{manufacturer}")
+    @ResponseBody
+    public List<Car> carsbymanufacturer(@PathVariable String manufacturer){
+        return carservice.getcarbymanufacturer(manufacturer);
+    }
+
+    
     @PostMapping("/submit")
     public void addCar(@RequestPart("carData") Car car,@RequestPart("image") MultipartFile image) throws IOException{
         carservice.addCar(car,image);

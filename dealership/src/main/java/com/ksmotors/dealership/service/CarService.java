@@ -29,22 +29,24 @@ public class CarService {
     }
 
     public void addCar(Car car,MultipartFile image) throws IOException {
-        System.out.println("Saving car: " + car);
-
         car.setImgname(image.getOriginalFilename());
         car.setImgtype(image.getContentType());
         car.setImgdata(image.getBytes());
-        System.out.println("Saving car: " + car);
-
         repo.save(car);
-        System.out.println("Saving car: " + car);
 
     }
+
     public List<Car> getcarbytype(@PathVariable String type)
     {
         return repo.findBytype(type);
     }
+    public List<Car> getrecentcars(){
+        return repo.findLast4Cars();
+    }
 
+    public List<Car> getcarbymanufacturer(@PathVariable String manufacturer) {
+        return repo.findBymanufacturer(manufacturer);
+    }
 
 }
 // this shit carries out logical shit
