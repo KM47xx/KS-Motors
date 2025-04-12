@@ -60,19 +60,12 @@ a:hover {
     color: rgb(227, 161, 9);
 }
 
-main {
-    min-height: 100vh;
-    flex: 1 0 auto;
-    border-top: 2px dotted rgb(66, 18, 18);
-    padding: 4vw;
-}
-
 footer {
     max-height: 80vh;
     display: flex;
     flex-direction: column;
     min-height: 20vh;
-    max-width: 99.5vw;
+    max-width: 99.8vw;
     background-image: url(assets/fbg.png);
     background-color: black;
     width: 100%;
@@ -151,29 +144,51 @@ header nav ul a.active {
 }
 
 .about {/*for aboutus page body*/
-    border-radius: 5%;
+    border-radius: 1.5%;
     width: auto;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
-    background-color: antiquewhite;
+    flex-direction: column;
+    background-color: #e9dbc6;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-shadow:  0 2px 15px rgb(74, 58, 47), 0 2px 20px rgba(66, 18, 18, 0);
 }
 
 .about1{
-    border-right: 3px solid black;
     font-size: 5vw;
-    font-style: italic;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: rgb(66, 18, 18);
-    margin-right: 1rem;
+    margin-right: 1.25rem;
 }
 .about2{
+    border-top: 3px solid rgb(66, 18, 18);
     font-size: 2.5vw;
     font-style: italic;
     color: rgb(66, 18, 18);
 }
+@media only screen and (max-width: 640px){
+    .about{
+        min-height: 75vh;
+        display: flex;
+        flex-direction: column;
+    }
+    .about1{
+        font-size: 5vh;
+        margin-inline: 2%;
+    }
+    .about2{
+        margin-inline: 2%;
+        border-top: 2px solid rgb(66, 18, 18);
+        border-left: 0;
+        font-size: 2.75vh;
+    }
+}
 
 main {
+    
+    flex: 1 0 auto;
+    border-top: 2px dotted rgb(66, 18, 18);
+    padding: 4vw;
     display: flex; 
     flex-direction: column;
     justify-content: center;
@@ -258,7 +273,7 @@ main {
 }
 
 .carblock {        /*listing page blocks*/
-    
+    transition: transform .2s;
     border-radius: 1em;
     background-color:#e9dbc6;
     box-sizing: border-box;
@@ -269,6 +284,9 @@ main {
     min-width: 15vw;
     min-height: 15vw;
     max-width: 25vw;
+}
+.carblock:hover{
+    transform: scale(125%);
 }
 @media only screen and (max-width: 640px) {
     .carblock {        /*listing page blocks*/
@@ -359,6 +377,21 @@ main {
     font-size: 1.4em;
     text-align: center;
 }
+@media only screen and (max-width: 640px){
+    .homecarblock{
+        background-color: 	#e9dbc6;
+        width:24rem;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 2px solid rgb(66, 18, 18);
+        border-radius: 20px;
+    }
+    .homecarblock img{
+        height: 12.5rem;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 /*over latest cars*/
 .divform{    /*form*/ 
     width: 90%;
@@ -386,20 +419,26 @@ main {
     grid-auto-flow: column;
     box-shadow:  0 2px 15px rgb(74, 58, 47), 0 2px 20px rgba(66, 18, 18, 0);
     table tr td{
+        text-align: center;
         width: 15rem;
         height: 15rem;
-        text-align: center;
         padding-inline: 5em;
+        min-height: 10rem;
+        min-width: 10rem;
+        transition: transform .2s;
     }
     img{
-        align-self: center;
-        width: 14rem;
+        align-self: top;
+        max-width: 10rem;
+        max-height: 10rem;
     }
     @media only screen and (max-width: 640px){
         img{
             width: 7rem;
         }
         table tr td{
+            min-height: 7rem;
+        min-width: 7rem;
             padding-inline: 0;
         }
     }
@@ -408,4 +447,7 @@ main {
         color: rgb(66, 18, 18);
         text-decoration: none;
     }
+}
+.brands td:hover{
+    transform: scale(125%);
 }
