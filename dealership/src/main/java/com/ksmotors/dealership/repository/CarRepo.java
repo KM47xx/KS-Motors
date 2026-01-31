@@ -19,4 +19,3 @@ public interface CarRepo extends JpaRepository<Car, Long> {
     @Query(value = "SELECT * FROM car ORDER BY idno DESC LIMIT 4", nativeQuery = true)
     List<Car> findLast4Cars();
 }
-// this shit is required for sql/db
