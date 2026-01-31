@@ -15,10 +15,3 @@ public class DealershipApplication {
 	}
 }
 //dont forget to start sql server b4!
-/* 
- C-Get
- R-Post
- U-update
- D-delete
- read this , just a note
- */
