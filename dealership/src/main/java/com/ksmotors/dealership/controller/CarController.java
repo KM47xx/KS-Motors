@@ -82,5 +82,3 @@ public class CarController {
         carservice.addCar(car,image);
     }
 }
-// this shit is controller, page address set karto,output cha pn kam karto
-// also db reset karna hai toh ye dalna only: TRUNCATE TABLE car; isse idno back to 1 hoga
